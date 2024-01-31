@@ -1,22 +1,33 @@
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public class Position {
 
     private final int x;
 
     private final int y;
 
-    private ConcretePiece Piece;
+
+    ArrayList<ConcretePiece> piecesSet = new ArrayList<>();
 
     public Position(int x, int y){
         this.x = x;
         this.y = y;
-        this.Piece = null;
     }
     public Position(int x, int y,ConcretePiece Piece){
         this.x = x;
         this.y = y;
-        this.Piece = Piece;
     }
-
+    
+    public HashSet<ConcretePiece> getPiecesSet(){HashSet<ConcretePiece> hashSet = new HashSet<>(piecesSet);
+        return hashSet;}
+    public void addPiece(ConcretePiece piece){
+        piecesSet.add(piece);
+    }
+    public void removePiece(){
+        if(piecesSet.size()>1)
+        piecesSet.removeLast();
+    }
     public int getX(){
         return x;
     }
@@ -25,11 +36,11 @@ public class Position {
     public int getY(){
         return y;
     }
-
-    public ConcretePiece getPiece(){return Piece;}
-
-    public void setPiece(ConcretePiece Piece) {this.Piece = Piece;}
-
-    public void removePiece() {this.Piece = null;}
-
+    @Override
+    public String toString(){
+        return "("+x+", "+y+")";
+    }
+    public String getPiecesToString(){
+        return piecesSet.size()+" pieces";
+    }
 }
